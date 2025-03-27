@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1 class="font-bold text-4xl py-5">Opciones de Cliente</h1>
+
+<a  href="{{ url_for('main.add_user') }}" class="mx-8 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Ingresar Cliente</a>
+
+<div class="px-8 py-8 relative overflow-x-auto">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    ID
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    DPI
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Nombre
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Correo
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Telefono
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{ usuario.id }}
+                </th>
+                <td class="px-6 py-4">
+                    {{ usuario.DPI }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ usuario.nombre }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ usuario.email }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ usuario.telefono }}
+                </td>
+                <td class="px-6 py-4">
+                    <a href="{{ url_for('main.edit_user', id=usuario.id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" >Editar</a>
+                    <a href="{{ url_for('main.delete_user', id=usuario.id) }}" onclick="return confirm('¿Seguro que deseas eliminar?')" class="px-8 font-medium text-red-600 dark:text-red-500 hover:underline" >Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
